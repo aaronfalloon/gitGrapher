@@ -43,14 +43,21 @@ for head in heads:
 pos = networkx.graphviz_layout(graph, prog='neato')
 
 # Draw only initial commits
-networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(0),  node_color='c')
+initial_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(0),  node_color='c')
 
 # Draw only normal commits
-networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(1), node_color='g')
+normal_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(1), node_color='g')
 
 # Draw only merge commits
-networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(2), node_color='r')
+merge_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(2), node_color='r')
 
 networkx.draw_networkx_edges(graph, pos)
+
+# Annotate with branch names
+for head in heads:
+    plt.annotate(head, xy=pos[head.commit], bbox=dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6))
+
+# The axis mean nothing
+plt.axis('off')
 
 plt.show()
