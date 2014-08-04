@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 repo = git.Repo(args.path)
 
-graph = networkx.Graph()
+graph = networkx.DiGraph()
 
 # Get all the branch head commits
 heads = repo.heads
