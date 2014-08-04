@@ -2,6 +2,7 @@ import sys
 import argparse
 import git
 import networkx
+import matplotlib
 import matplotlib.pyplot as plt
 
 def add_commit(commit):
@@ -55,7 +56,15 @@ networkx.draw_networkx_edges(graph, pos)
 
 # Annotate with branch names
 for head in heads:
-    plt.annotate(head, xy=pos[head.commit], bbox=dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6))
+    # Position each annotation around a circle
+    circle = matplotlib.patches.Circle(xy=pos[head.commit], radius=80)
+    circle_verts = circle.get_verts()
+
+    bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6)
+    arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3', color='#333333', rad=0.3)
+
+    plt.annotate(head, xy=pos[head.commit], xytext=circle_verts[0], bbox=bbox_props, arrowprops=arrow_props)
+
 
 # The axis mean nothing
 plt.axis('off')
