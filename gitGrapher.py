@@ -40,7 +40,7 @@ heads = repo.heads
 for head in heads:
     add_commit_with_parents(head.commit)
 
-pos = networkx.spring_layout(graph)
+pos = networkx.graphviz_layout(graph, prog='neato')
 
 # Draw only initial commits
 networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(0),  node_color='c')
