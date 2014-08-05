@@ -61,7 +61,7 @@ for head in heads:
     circle_verts = circle.get_verts()
 
     bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6)
-    arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3', color='#333333', rad=0.3)
+    arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3, rad=0.5', color='#333333')
 
     plt.annotate(head, xy=pos[head.commit], xytext=circle_verts[0], bbox=bbox_props, arrowprops=arrow_props)
 
