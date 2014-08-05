@@ -45,13 +45,13 @@ for head in heads:
 pos = networkx.graphviz_layout(graph, prog='neato')
 
 # Draw only initial commits
-initial_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(0),  node_color='c')
+initial_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(0),  node_color='c', node_size=800)
 
 # Draw only normal commits
-normal_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(1), node_color='g')
+normal_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(1), node_color='g', node_size=800)
 
 # Draw only merge commits
-merge_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(2), node_color='r')
+merge_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_commits_with_n_parents(2), node_color='r', node_size=800)
 
 networkx.draw_networkx_edges(graph, pos)
 
