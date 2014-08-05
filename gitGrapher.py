@@ -70,7 +70,7 @@ for ref_commit in refs:
     circle = matplotlib.patches.Circle(xy=pos[ref_commit], radius=80)
     circle_verts = circle.get_verts()
 
-    bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6)
+    bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.5)
     arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3, rad=0.2', color='#333333')
 
     for index, ref in enumerate(refs[ref_commit]):
