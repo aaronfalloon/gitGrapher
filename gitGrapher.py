@@ -85,7 +85,7 @@ for ref_commit in refs:
 # Add the HEAD to the graph
 head_position = annotation_positions[repo.head.reference]
 
-plt.annotate("HEAD", xy=(30, head_position[1] - 20), bbox=dict(boxstyle='round, pad=0.2', fc='#eeeeee', alpha=0.7))
+plt.annotate("HEAD", xy=(head_position[0] + 40, head_position[1] - 25), bbox=dict(boxstyle='round, pad=0.2', fc='#eeeeee', alpha=0.7))
 
 # The axis mean nothing
 plt.axis('off')
