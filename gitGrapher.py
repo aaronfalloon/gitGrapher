@@ -65,6 +65,7 @@ for head in heads:
         refs[head.commit].append(head)
 
 # Annotate with branch names
+annotation_positions = {}
 for ref_commit in refs:
     # Position each annotation around a circle
     circle = matplotlib.patches.Circle(xy=pos[ref_commit], radius=80)
@@ -77,8 +78,14 @@ for ref_commit in refs:
         # Work out the position around the circle
         circle_pos = math.floor(len(circle_verts) / (index + 1)) - 1
 
+        annotation_positions[ref] = circle_verts[circle_pos]
+
         plt.annotate(ref, xy=pos[ref_commit], xytext=circle_verts[circle_pos], bbox=bbox_props, arrowprops=arrow_props)
 
+# Add the HEAD to the graph
+head_position = annotation_positions[repo.head.reference]
+
+plt.annotate("HEAD", xy=(30, head_position[1] - 20), bbox=dict(boxstyle='round, pad=0.2', fc='#eeeeee', alpha=0.7))
 
 # The axis mean nothing
 plt.axis('off')
