@@ -4,6 +4,7 @@ import git
 import networkx
 import matplotlib
 import matplotlib.pyplot as plt
+import math
 
 def add_commit(commit):
     graph.add_node(commit, {
@@ -54,16 +55,29 @@ merge_commit_positions = networkx.draw_networkx_nodes(graph, pos, nodelist=get_c
 
 networkx.draw_networkx_edges(graph, pos)
 
-# Annotate with branch names
+# Group the branch names by commit
+refs = {}
 for head in heads:
+    if head.commit not in refs:
+        refs[head.commit] = []
+        refs[head.commit].append(head)
+    elif head.commit in refs:
+        refs[head.commit].append(head)
+
+# Annotate with branch names
+for ref_commit in refs:
     # Position each annotation around a circle
-    circle = matplotlib.patches.Circle(xy=pos[head.commit], radius=80)
+    circle = matplotlib.patches.Circle(xy=pos[ref_commit], radius=80)
     circle_verts = circle.get_verts()
 
     bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6)
     arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3, rad=0.5', color='#333333')
 
-    plt.annotate(head, xy=pos[head.commit], xytext=circle_verts[0], bbox=bbox_props, arrowprops=arrow_props)
+    for index, ref in enumerate(refs[ref_commit]):
+        # Work out the position around the circle
+        circle_pos = math.floor(len(circle_verts) / (index + 1)) - 1
+
+        plt.annotate(ref, xy=pos[ref_commit], xytext=circle_verts[circle_pos], bbox=bbox_props, arrowprops=arrow_props)
 
 
 # The axis mean nothing
