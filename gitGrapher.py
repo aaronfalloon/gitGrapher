@@ -71,7 +71,7 @@ for ref_commit in refs:
     circle_verts = circle.get_verts()
 
     bbox_props = dict(boxstyle='round, pad=0.2', fc='yellow', alpha=0.6)
-    arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3, rad=0.5', color='#333333')
+    arrow_props = dict(arrowstyle='-|>', connectionstyle='arc3, rad=0.2', color='#333333')
 
     for index, ref in enumerate(refs[ref_commit]):
         # Work out the position around the circle
