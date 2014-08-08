@@ -5,6 +5,7 @@ import networkx
 import matplotlib
 import matplotlib.pyplot as plt
 import math
+import matplotlib.transforms
 
 def add_commit(commit):
     graph.add_node(commit, {
@@ -30,6 +31,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path', metavar='P', help='A path to a directory which contains a Git repo')
 
 args = parser.parse_args()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+plt.subplot(111)
 
 repo = git.Repo(args.path)
 
@@ -85,7 +90,7 @@ for ref_commit in refs:
 # Add the HEAD to the graph
 head_position = annotation_positions[repo.head.reference]
 
-plt.annotate("HEAD", xy=(head_position[0] + 40, head_position[1] - 25), bbox=dict(boxstyle='round, pad=0.2', fc='#eeeeee', alpha=0.7))
+plt.annotate("HEAD", xy=(head_position[0], head_position[1]), xytext=(20, -10), bbox=dict(boxstyle='round, pad=0.2', fc='#eeeeee', alpha=0.7), textcoords='offset points')
 
 # The axis mean nothing
 plt.axis('off')
