@@ -32,6 +32,9 @@ parser.add_argument('-p', '--path', metavar='P', help='A path to a directory whi
 
 args = parser.parse_args()
 
+# Set the figure size
+plt.rcParams['figure.figsize'] = (10.0, 8.0)
+
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.subplot(111)
